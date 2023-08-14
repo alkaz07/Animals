@@ -7,7 +7,7 @@ public class Donkey extends Animals implements Yelling{
 
     @Override
     public String yelling() {
-return "иаииаиаиаиаи";
+        return "иаииаиаиаиаи";
 
     }
 }

@@ -2,9 +2,11 @@ package com.example.animals;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -25,6 +27,8 @@ public class HelloController {
     @FXML
     Button start;
 
+    Model model = new Model();
+
     public void loadText()
     {
         TextField txtFileName;
@@ -34,17 +38,10 @@ public class HelloController {
 
         try {
             List<String> lines = Files.readAllLines(Path.of(fname), StandardCharsets.UTF_8);
-            for (String str : lines) {
-                txtLines.setText(txtLines.getText()+ "\n" + str);
-                String[]mas=str.split(" ");
+            model.loadAnimals(lines);
 
-                Button animalButton = new Button(str);
-                animalsBox.getChildren().add(animalButton);
-                animalButton.setOnAction(actionEvent -> {
-                    txtLines.setText(mas[1]);
-                });
-                
-
+            for (Animals beast : model.animals) {
+                makeButtons(beast);
             }
 
         }
@@ -54,4 +51,35 @@ public class HelloController {
             }
 
             }
+
+    private void makeButtons(Animals beast) {
+        Pane pan = new VBox();
+        Label animalLabel = new Label(beast.name);
+        pan.getChildren().add(animalLabel);
+        if(beast instanceof Purring)
+        {
+            Button bpur = new Button("Мур");
+            pan.getChildren().add(bpur);
+            bpur.setOnAction(actionEvent -> txtLines.setText(((Purring) beast).purring()));
+        }
+        if(beast instanceof Growls)
+        {
+            Button bgrowl = new Button("Р-ррр");
+            pan.getChildren().add(bgrowl);
+            bgrowl.setOnAction(actionEvent -> txtLines.setText(((Growls) beast).growl()));
+        }
+        if(beast instanceof Howls)
+        {
+            Button b = new Button("Выть");
+            pan.getChildren().add(b);
+            b.setOnAction(a->txtLines.setText(((Howls) beast).howls()));
+        }
+        if(beast instanceof Yelling)
+        {
+            Button b = new Button("Иа-иа");
+            pan.getChildren().add(b);
+            b.setOnAction(a->txtLines.setText(((Yelling) beast).yelling()));
+        }
+        animalsBox.getChildren().add(pan);
+    }
 }
