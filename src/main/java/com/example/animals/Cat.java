@@ -7,12 +7,12 @@ public class Cat extends Animals implements Growls, Purring {
 
     @Override
     public String growl() {
-
-        return "РРРРРР";
+        //подправили вывод с учетом сложного SimpleStringProperty
+        return name.get()+": "+"РРРРРР";
     }
 
     @Override
     public String purring() {
-        return "муррррррр";
+        return name.get()+": "+"муррррррр";
     }
 }

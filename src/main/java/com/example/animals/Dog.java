@@ -7,11 +7,11 @@ public class Dog extends Animals implements Barks, Howls {
 
     @Override
     public String barks() {
-        return "гавгавгав";
+        return name.get()+": "+"гавгавгав";
     }
 
     @Override
     public String howls() {
-        return "уууууууу";
+        return name.get()+": "+"уууууууу";
     }
 }

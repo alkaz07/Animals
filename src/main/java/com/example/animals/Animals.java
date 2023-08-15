@@ -1,10 +1,12 @@
 package com.example.animals;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class Animals {
-    String name;
+    SimpleStringProperty name = new SimpleStringProperty(); //вместо String взяли наблюдаемое свойство
 
     public Animals(String name) {
-        this.name = name;
+        this.name.set( name);
     }
 
 

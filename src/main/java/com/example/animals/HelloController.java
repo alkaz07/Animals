@@ -54,8 +54,10 @@ public class HelloController {
 
     private void makeButtons(Animals beast) {
         Pane pan = new VBox();
-        Label animalLabel = new Label(beast.name);
-        pan.getChildren().add(animalLabel);
+        //Label animalLabel = new Label(beast.name.get());
+        TextField textName = new TextField();                   //вместо налдписи - редактируемое поле
+        textName.textProperty().bindBidirectional(beast.name);  //связь между текстовым полем и именем животного
+        pan.getChildren().add(textName);
         if(beast instanceof Purring)
         {
             Button bpur = new Button("Мур");

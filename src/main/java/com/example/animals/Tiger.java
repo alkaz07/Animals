@@ -9,7 +9,7 @@ public class Tiger extends Animals implements Growls {
 
     public String growl() {
 
-        return "rrrrrrrr";
+        return name.get()+": "+"rrrrrrrr";
     }
 }
 
